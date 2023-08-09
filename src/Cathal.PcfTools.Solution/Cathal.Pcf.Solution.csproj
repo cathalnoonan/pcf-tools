@@ -10,6 +10,7 @@
         <Authors>cathalnoonandev</Authors>
         <Company></Company>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <!-- Don't build or include any DLLs in this project -->
@@ -22,6 +23,9 @@
     <ItemGroup>
         <!-- Copy files to the "Sdk" folder of the NuGet package produced -->
         <None Include="Sdk/**" Pack="True" PackagePath="Sdk/" />
+
+        <!-- Include README in the package -->
+        <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
     <ItemGroup>
