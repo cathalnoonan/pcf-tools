@@ -1,0 +1,4 @@
+<Project DefaultTargets="Build">
+    <Import Project="$(MSBuildThisFileDirectory)..\src\Cathal.PcfTools.Proj\Sdk\Sdk.props" />
+    <Import Project="$(MSBuildThisFileDirectory)..\src\Cathal.PcfTools.Proj\Sdk\Sdk.targets" />
+</Project>

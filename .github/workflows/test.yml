@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: "Setup: Checkout the repo"
+        uses: actions/checkout@v3
+      - name: "Setup: Setup dotnet"
+        uses: actions/setup-dotnet@v3
+      - name: "Setup: Node 18"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Build
+      - name: "Build: Build the test folder"
+        run: dotnet build test
+        shell: bash
+
+      # Validate
+      - name: "Validate: Check managed solution exists"
+        run: |-
+          file_path="$(pwd)/test/dist/solution_1_2_3_4_managed.zip"
+          if [ -f "$file_path" ]; then
+            echo "File found: $file_path"
+          else
+            echo "File not found: $file_path"
+            exit 1
+          fi
+        shell: bash

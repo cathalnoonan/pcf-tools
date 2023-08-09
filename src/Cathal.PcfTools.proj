@@ -1,0 +1,23 @@
+<Project>
+
+    <PropertyGroup>
+        <Version Condition="'$(Version)'==''">0.0.0</Version>
+        <NuGetPackageSource Condition="'$(NugetPackageSource)'==''">https://api.nuget.org/v3/index.json</NuGetPackageSource>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <NuGetPackages Include="Cathal.PcfTools.Proj" />
+        <NuGetPackages Include="Cathal.PcfTools.Solution" />
+    </ItemGroup>
+
+    <Target Name="Pack">
+        <Message Importance="high" Text="Packing nuget packages..." />
+        <Exec Command="dotnet pack %(NuGetPackages.Identity) --configuration Release --output &quot;$(MSBuildThisFileDirectory)../dist&quot; -p:Version=$(Version)" />
+    </Target>
+
+    <Target Name="Publish">
+        <Message Importance="high" Text="Publishing nuget packages..." />
+        <Exec Command="dotnet nuget push &quot;$(MSBuildThisFileDirectory)../dist/%(NuGetPackages.Identity).$(Version).nupkg&quot; --source $(NuGetPackageSource) --skip-duplicate --api-key $(NuGetApiKey)" />
+    </Target>
+
+</Project>

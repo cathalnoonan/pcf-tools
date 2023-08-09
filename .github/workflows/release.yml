@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: "Setup: Checkout the repo"
+        uses: actions/checkout@v3
+      - name: "Setup: Setup dotnet"
+        uses: actions/setup-dotnet@v3
+      - name: "Setup: Node 18"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Configure environment variables
+      - name: "Configure: Version"
+        run: echo "Version=${GITHUB_REF##*/v}" >> $GITHUB_ENV
+      - name: "Configure: NuGetApiKey"
+        run: echo "NuGetApiKey=${{ secrets.NUGET_API_KEY }}" >> $GITHUB_ENV
+
+      # Pack and publish
+      - name: "Pack: dotnet pack src"
+        run: dotnet pack src
+      - name: "Publish: dotnet publish src"
+        run: dotnet publish src

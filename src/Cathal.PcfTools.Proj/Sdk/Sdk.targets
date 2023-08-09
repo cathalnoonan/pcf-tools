@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+    <Target Name="Restore">
+        <Message Importance="high" Text="Restoring npm packages" />
+        <ItemGroup>
+            <ProjectFiles Include="**/*.*proj" Exclude="*.proj" />
+        </ItemGroup>
+        <Exec Command="npm install --no-audit --ignore-scripts --no-fund"
+              WorkingDirectory="$(MSBuildProjectDirectory)/control" />
+        <Exec Command="npm audit --omit=dev"
+              WorkingDirectory="$(MSBuildProjectDirectory)/control" />
+        <MSBuild Targets="Restore"
+                 Projects="@(ProjectFiles)" />
+    </Target>
+
+    <Target Name="Build">
+        <ItemGroup>
+            <PacSolutionFiles Include="**/*.cdsproj" />
+        </ItemGroup>
+        <MSBuild Targets="Build"
+                 Properties="Configuration=Release"
+                 Projects="@(PacSolutionFiles)" />
+    </Target>
+
+    <Target Name="Clean">
+        <Exec Command="git clean -ffdX"
+              WorkingDirectory="$(MSBuildProjectDirectory)" />
+    </Target>
+</Project>
