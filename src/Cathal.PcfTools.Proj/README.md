@@ -7,6 +7,8 @@ The expected folder structure of the repo is as follows:
 - solution/
 - {file_name}.proj
 
+## How to consume
+
 The `.proj` file should contain the following contents:
 
 ```diff
