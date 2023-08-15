@@ -2,8 +2,5 @@
 <Project>
     <PropertyGroup>
         <CurrentNugetPackageName>Cathal.PcfTools.Solution</CurrentNugetPackageName>
-        <Namespace>
-            <Namespace Prefix="" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
-        </Namespace>
     </PropertyGroup>
 </Project>

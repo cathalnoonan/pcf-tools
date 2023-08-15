@@ -45,7 +45,6 @@
 
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfTemplateFiles"
-                 Properties="NewVersion=$(NewVersion)"
                  Projects="@(ProjectFiles)" />
     </Target>
 </Project>

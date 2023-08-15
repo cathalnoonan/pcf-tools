@@ -18,7 +18,9 @@ The solution zip file that is build will be added to the `dist/` folder one leve
 The following change should be made in the `solution.cdsproj` file:
 
 ```diff
- <?xml version="1.0" encoding="utf-8"?>
- <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
-+         Sdk="Cathal.PcfTools.Solution/1.1.0">
+  <?xml version="1.0" encoding="utf-8"?>
+- <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.Solution/1.1.0">
 ```
+
+**Note**: Replace `1.1.0` above with later versions as appropriate.
