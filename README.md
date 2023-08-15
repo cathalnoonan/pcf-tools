@@ -64,3 +64,8 @@ Copying template files into the projects:
 ```bash
 dotnet msbuild -t:UpdatePcfTemplateFiles
 ```
+
+Set the version number consistently throughout the project:
+```bash
+dotnet msbuild test -t:SetVersion -p:NewVersion=X.Y.Z
+```

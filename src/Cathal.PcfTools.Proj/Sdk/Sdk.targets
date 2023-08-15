@@ -47,4 +47,16 @@
         <MSBuild Targets="UpdatePcfTemplateFiles"
                  Projects="@(ProjectFiles)" />
     </Target>
+
+    <Target Name="SetVersion">
+        <!-- Make sure $(NewVersion) is passed -->
+        <Error Text="Required property 'NewVersion' property was not provieded."
+               Condition=" '$(NewVersion)' == '' " />
+        <Message Importance="high" Text="Setting the version number to $(NewVersion)..." />
+
+        <!-- Update other projects -->
+        <MSBuild Targets="SetVersion"
+                 Properties="NewVersion=$(NewVersion)"
+                 Projects="@(ProjectFiles)" />
+    </Target>
 </Project>

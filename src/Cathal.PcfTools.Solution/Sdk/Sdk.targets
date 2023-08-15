@@ -56,4 +56,24 @@
         <!-- Not implemented -->
     </Target>
 
+    <Target Name="SetVersion">
+        <!-- Make sure $(NewVersion) is passed -->
+        <Error Text="Required property 'NewVersion' property was not provieded."
+               Condition=" '$(NewVersion)' == '' " />
+
+        <ItemGroup>
+            <SolutionXmlFiles Include="$(MSBuildProjectDirectory)\**\Solution.xml" />
+        </ItemGroup>
+        <PropertyGroup>
+            <Namespace>
+                <Namespace Prefix="" Uri="http://www.w3.org/2001/XMLSchema-instance" />
+                <Namespace Prefix="xsi" Uri="http://www.w3.org/2001/XMLSchema-instance" />
+            </Namespace>
+        </PropertyGroup>
+
+        <!-- <ImportExportXmlSolutionManifest> ... <SolutionManifest> ... <Version> -->
+        <XmlPoke XmlInputPath="%(SolutionXmlFiles.Identity)" Query="ImportExportXml/SolutionManifest/Version" Value="$(NewVersion)"
+                 Namespaces="$(Namespace)" />
+    </Target>
+
 </Project>
