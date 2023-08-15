@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <NuGetPackages Include="Cathal.PcfTools.Control" />
         <NuGetPackages Include="Cathal.PcfTools.Proj" />
         <NuGetPackages Include="Cathal.PcfTools.Solution" />
     </ItemGroup>

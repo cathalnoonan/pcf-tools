@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project>
+    <PropertyGroup>
+        <CurrentNugetPackageName>Cathal.PcfTools.Proj</CurrentNugetPackageName>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    </PropertyGroup>
 
+    <ItemGroup>
+        <PacSolutionFiles Include="**\*.cdsproj" />
+        <ProjectFiles Include="**\*.*proj" Exclude="*.proj" />
+    </ItemGroup>
 </Project>

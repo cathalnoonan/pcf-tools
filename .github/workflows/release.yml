@@ -5,6 +5,12 @@ on:
     types:
       - published
 
+env:
+  DOTNET_ROLL_FORWARD: Major
+  DOTNET_NOLOGO: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
 jobs:
   release:
     name: Release
@@ -15,10 +21,11 @@ jobs:
         uses: actions/checkout@v3
       - name: "Setup: Setup dotnet"
         uses: actions/setup-dotnet@v3
-      - name: "Setup: Node 18"
+      - name: "Setup: Node"
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          # Use the .nvmrc file from the package contents
+          node-version-file: src/Cathal.PcfTools.Proj/contentFiles/.nvmrc
 
       # Configure environment variables
       - name: "Configure: Version"
