@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project>
     <Target Name="Restore">
-        <MSBuild Targets="Restore"
-                 Projects="@(ProjectFiles)" />
-    </Target>
-
-    <Target Name="Build">
-        <MSBuild Targets="Build"
-                 Properties="Configuration=$(Configuration)"
-                 Projects="@(PacSolutionFiles)" />
-    </Target>
-
-    <Target Name="Clean">
-        <Exec Command="git clean -ffdX"
+        <Message Importance="high" Text="Restoring npm packages" />
+        <Exec Command="npm install --no-audit --ignore-scripts --no-fund"
+              WorkingDirectory="$(MSBuildProjectDirectory)" />
+        <Exec Command="npm audit --omit=dev"
               WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
@@ -26,26 +18,14 @@
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
         <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" />
-
-        <!-- Update other projects -->
-        <MSBuild Targets="UpdatePcfToolsSdk"
-                 Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)" />
     </Target>
 
-
     <Target Name="UpdatePcfTemplateFiles">
-        <Message Importance="high" Text="Copying files from template folder..." />
         <ItemGroup>
             <TemplateFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\**\*" />
         </ItemGroup>
         <Copy SourceFiles="@(TemplateFiles)"
               DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
               SkipUnchangedFiles="true" />
-
-        <!-- Update other projects -->
-        <MSBuild Targets="UpdatePcfTemplateFiles"
-                 Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)" />
     </Target>
 </Project>

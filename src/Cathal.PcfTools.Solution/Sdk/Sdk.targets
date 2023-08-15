@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
     <!-- MSBuild target to set the solution name. -->
@@ -37,6 +38,22 @@
             <SolutionPackageZipFilePath>$(MSBuildProjectDirectory)\..\dist\$(temp_SolutionUniqueName).zip</SolutionPackageZipFilePath>
         </PropertyGroup>
 
+    </Target>
+
+    <Target Name="UpdatePcfToolsSdk">
+        <!-- Make sure $(NewVersion) is passed -->
+        <Error Text="Required property 'NewVersion' property was not provieded."
+               Condition=" '$(NewVersion)' == '' " />
+
+        <!-- Update Proj file -->
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk">
+            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        </XmlPeek>
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" />
+    </Target>
+
+    <Target Name="UpdatePcfTemplateFiles">
+        <!-- Not implemented -->
     </Target>
 
 </Project>

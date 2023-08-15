@@ -10,5 +10,5 @@ The expected folder structure of the repo is as follows:
 The `.proj` file should contain the following contents:
 
 ```xml
-<Project Sdk="Cathal.PcfTools.Proj/1.0.0" DefaultTargets="Build" />
+<Project Sdk="Cathal.PcfTools.Proj/1.1.0" DefaultTargets="Build" />
 ```
