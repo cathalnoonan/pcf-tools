@@ -42,11 +42,17 @@
         <Error Text="Required property 'NewVersion' property was not provieded."
                Condition=" '$(NewVersion)' == '' " />
 
+        <PropertyGroup>
+            <Namespace>
+                <Namespace Prefix="" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
+            </Namespace>
+        </PropertyGroup>
+
         <!-- Update Proj file -->
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk">
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Namespaces="$(Namespace)">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" />
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
     </Target>
 
     <Target Name="UpdatePcfTemplateFiles">
