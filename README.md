@@ -58,17 +58,24 @@ The following change should be made in the `solution.cdsproj` file:
 
 ## Commands
 
-Upgrading the tools from command line:
-```bash
-dotnet msbuild -t:UpdatePcfToolsSdk -p:NewVersion=X.Y.Z
-```
+The following commands can be run from the root of the project where the packages are being consumed:
 
-Copying template files into the projects:
-```bash
-dotnet msbuild -t:UpdatePcfTemplateFiles
-```
+- Build the control / solution:
+  ```bash
+  dotnet build
+  ```
 
-Set the version number consistently throughout the project:
-```bash
-dotnet msbuild -t:SetVersion -p:NewVersion=X.Y.Z
-```
+- Upgrading the tools from command line:
+  ```bash
+  dotnet msbuild -t:UpdatePcfToolsSdk -p:NewVersion=X.Y.Z
+  ```
+
+- Copying template files into the projects:
+  ```bash
+  dotnet msbuild -t:UpdatePcfTemplateFiles
+  ```
+
+- Set the version number consistently throughout the project:
+  ```bash
+  dotnet msbuild -t:SetVersion -p:NewVersion=X.Y.Z
+  ```
