@@ -3,7 +3,6 @@
 
     <!-- MSBuild target to set the solution name. -->
     <Target Name="SetSolutionZipName" BeforeTargets="PrepareForBuild">
-
         <!-- Get solution unique name -->
         <XmlPeek XmlInputPath="$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml"
             Query="/ImportExportXml/SolutionManifest/UniqueName/text()">
@@ -15,7 +14,6 @@
             Query="/ImportExportXml/SolutionManifest/Version/text()">
             <Output TaskParameter="Result" ItemName="temp_SolutionVersionNumber" />
         </XmlPeek>
-
 
         <!-- Use the above variables and tasks to generate solution output path. -->
         <PropertyGroup>
@@ -37,7 +35,6 @@
             <!-- Assign SolutionPackageZipFilePath: Consumed by the dotnet build -->
             <SolutionPackageZipFilePath>$(MSBuildProjectDirectory)\..\dist\$(temp_SolutionUniqueName).zip</SolutionPackageZipFilePath>
         </PropertyGroup>
-
     </Target>
 
     <Target Name="UpdatePcfToolsSdk">

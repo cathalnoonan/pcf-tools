@@ -1,14 +1,14 @@
 # PCF Tools
 [![Test](https://github.com/cathalnoonan/pcf-tools/actions/workflows/test.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/test.yml) [![Release](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml)
 
-## Cathal.PcfTools.Control
-[![NuGet version (Cathal.PcfTools.Control)](https://img.shields.io/nuget/v/Cathal.PcfTools.Control.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.Control)](https://www.nuget.org/packages/Cathal.PcfTools.Control/)
+## Cathal.PcfTools.MSBuild.Control
+[![NuGet version (Cathal.PcfTools.MSBuild.Control)](https://img.shields.io/nuget/v/Cathal.PcfTools.MSBuild.Control.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.MSBuild.Control)](https://www.nuget.org/packages/Cathal.PcfTools.MSBuild.Control/)
 
-## Cathal.PcfTools.Proj
-[![NuGet version (Cathal.PcfTools.Proj)](https://img.shields.io/nuget/v/Cathal.PcfTools.Proj.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.Proj)](https://www.nuget.org/packages/Cathal.PcfTools.Proj/)
+## Cathal.PcfTools.MSBuild.Proj
+[![NuGet version (Cathal.PcfTools.MSBuild.Proj)](https://img.shields.io/nuget/v/Cathal.PcfTools.MSBuild.Proj.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.MSBuild.Proj)](https://www.nuget.org/packages/Cathal.PcfTools.MSBuild.Proj/)
 
-## Cathal.PcfTools.Solution
-[![NuGet version (Cathal.PcfTools.Solution)](https://img.shields.io/nuget/v/Cathal.PcfTools.Solution.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.Solution)](https://www.nuget.org/packages/Cathal.PcfTools.Solution/) 
+## Cathal.PcfTools.MSBuild.Solution
+[![NuGet version (Cathal.PcfTools.MSBuild.Solution)](https://img.shields.io/nuget/v/Cathal.PcfTools.MSBuild.Solution.svg?style=flat-square&label=NuGet:+Cathal.PcfTools.MSBuild.Solution)](https://www.nuget.org/packages/Cathal.PcfTools.MSBuild.Solution/)
 
 ---
 
@@ -24,8 +24,10 @@ The repo assumes a project uses the following folder structure:
 The `.proj` file should contain the following contents:
 
 ```diff
-+  <Project Sdk="Cathal.PcfTools.Proj/1.1.0" DefaultTargets="Build" />
++  <Project Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.0" DefaultTargets="Build" />
 ```
+
+**Note**: Replace `0.1.0` above with later versions as appropriate.
 
 ### control/
 
@@ -34,10 +36,10 @@ The following change should be made in the `control.pcfproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.Control/1.1.0">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.0">
 ```
 
-**Note**: Replace `1.1.0` above with later versions as appropriate.
+**Note**: Replace `0.1.0` above with later versions as appropriate.
 
 ### solution/
 
@@ -46,10 +48,10 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.Solution/1.1.0">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.0">
 ```
 
-**Note**: Replace `1.1.0` above with later versions as appropriate.
+**Note**: Replace `0.1.0` above with later versions as appropriate.
 
 ---
 

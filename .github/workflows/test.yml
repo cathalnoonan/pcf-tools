@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # Use the .nvmrc file from the package contents
-          node-version-file: src/Cathal.PcfTools.Proj/contentFiles/.nvmrc
+          node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
 
       # Build
       - name: "Build: Build the test folder"

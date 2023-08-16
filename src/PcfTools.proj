@@ -6,9 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <NuGetPackages Include="Cathal.PcfTools.Control" />
-        <NuGetPackages Include="Cathal.PcfTools.Proj" />
-        <NuGetPackages Include="Cathal.PcfTools.Solution" />
+        <NuGetPackages Include="Cathal.PcfTools.MSBuild.Control" />
+        <NuGetPackages Include="Cathal.PcfTools.MSBuild.Proj" />
+        <NuGetPackages Include="Cathal.PcfTools.MSBuild.Solution" />
     </ItemGroup>
 
     <Target Name="Pack">

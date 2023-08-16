@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="$(MSBuildThisFileDirectory)\Sdk\Sdk.props" />
+
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <NoWarn>$(NoWarn);NU5128</NoWarn>
 
         <!-- NuGet package information -->
-        <PackageId>Cathal.PcfTools.Control</PackageId>
+        <PackageId>$(CurrentNugetPackageName)</PackageId>
         <Version>0.0.0</Version>
         <Authors>cathalnoonandev</Authors>
         <Company></Company>
@@ -14,22 +16,16 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
+    <!-- Don't build or include any DLLs in this project -->
     <PropertyGroup>
-        <!-- Don't build or include any DLLs in this project -->
         <NoBuild>true</NoBuild>
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-
-        <!-- Ignore default excludes so the hidden files/folders can be included in the package -->
-        <NoDefaultExcludes>true</NoDefaultExcludes>
     </PropertyGroup>
 
     <ItemGroup>
         <!-- Copy files to the "Sdk" folder of the NuGet package produced -->
         <None Include="Sdk/**" Pack="True" PackagePath="Sdk/" />
-
-        <!-- Copy the template folder -->
-        <Content Include="contentFiles/**" Exclude="contentFiles/**/.DS_Store" Pack="True" PackagePath="contentFiles/" />
 
         <!-- Include README in the package -->
         <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath="/" />
