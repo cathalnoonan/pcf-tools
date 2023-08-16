@@ -42,7 +42,7 @@ jobs:
       # Validate
       - name: "Validate: Check managed solution exists"
         run: |-
-          file_path="$(pwd)/test/dist/sample_solution_1_2_3_4_managed.zip"
+          file_path="$(pwd)/test/dist/sample_solution_0_1_2_managed.zip"
           if [ -f "$file_path" ]; then
             echo "File found: $file_path"
           else
