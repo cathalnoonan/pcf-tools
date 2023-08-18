@@ -15,8 +15,13 @@
         <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(CurrentNugetPackageName)/$(NewVersion)'" />
 
         <!-- Update the project SDK -->
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk">
+        <PropertyGroup>
+            <Namespace>
+                <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
+            </Namespace>
+        </PropertyGroup>
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/@Sdk" Namespaces="$(Namespace)">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
         <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
