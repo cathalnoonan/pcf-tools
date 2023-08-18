@@ -53,10 +53,6 @@
                Condition=" '$(CurrentNugetPackageName)/$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
-    <Target Name="UpdatePcfTemplateFiles">
-        <!-- Not implemented -->
-    </Target>
-
     <Target Name="SetVersion">
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."

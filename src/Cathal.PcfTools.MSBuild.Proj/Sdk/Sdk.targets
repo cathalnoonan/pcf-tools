@@ -2,13 +2,15 @@
 <Project>
     <Target Name="Restore">
         <MSBuild Targets="Restore"
-                 Projects="@(ProjectFiles)" />
+                 Projects="@(ProjectFiles)"
+                 SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="Build">
         <MSBuild Targets="Build"
                  Properties="Configuration=$(Configuration);SolutionDistFolder=$(MSBuildProjectDirectory)\dist"
-                 Projects="@(PacSolutionFiles)" />
+                 Projects="@(PacSolutionFiles)"
+                 SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="Clean">
@@ -34,7 +36,8 @@
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfToolsSdk"
                  Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)" />
+                 Projects="@(ProjectFiles)"
+                 SkipNonexistentTargets="true" />
     </Target>
 
 
@@ -50,7 +53,8 @@
 
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfTemplateFiles"
-                 Projects="@(ProjectFiles)" />
+                 Projects="@(ProjectFiles)"
+                 SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="SetVersion">
@@ -62,6 +66,7 @@
         <!-- Update other projects -->
         <MSBuild Targets="SetVersion"
                  Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)" />
+                 Projects="@(ProjectFiles)"
+                 SkipNonexistentTargets="true" />
     </Target>
 </Project>
