@@ -58,7 +58,7 @@ The following change should be made in the `solution.cdsproj` file:
 
 ## Commands
 
-The following commands can be run from the folder where the `{project_name}.proj`` file exists:
+The following commands can be run from the folder where the `{project_name}.proj` file exists:
 
 - Build the control / solution:
   ```bash
