@@ -25,7 +25,7 @@ The `.proj` file should contain the following contents:
 
 ```diff
 +  <?xml version="1.0" encoding="utf-8"?>
-+  <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.0" />
++  <Project DefaultTargets="Build" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.0" />
 ```
 
 **Note**: Replace `0.1.0` above with later versions as appropriate.
@@ -37,7 +37,7 @@ The following change should be made in the `control.pcfproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.0">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.0">
 ```
 
 **Note**: Replace `0.1.0` above with later versions as appropriate.
@@ -49,7 +49,7 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.0">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.0">
 ```
 
 **Note**: Replace `0.1.0` above with later versions as appropriate.
@@ -58,7 +58,7 @@ The following change should be made in the `solution.cdsproj` file:
 
 ## Commands
 
-The following commands can be run from the root of the project where the packages are being consumed:
+The following commands can be run from the folder where the `{project_name}.proj`` file exists:
 
 - Build the control / solution:
   ```bash

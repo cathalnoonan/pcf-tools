@@ -22,18 +22,12 @@
                Condition=" '$(NewVersion)' == '' " />
         <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(CurrentNugetPackageName)/$(NewVersion)'" />
 
-        <PropertyGroup>
-            <Namespace>
-                <Namespace Prefix="" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
-            </Namespace>
-        </PropertyGroup>
-
         <!-- Update the project SDK -->
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Namespaces="$(Namespace)">
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" />
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="Sdk version assigned in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
+        <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
         <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
                Condition=" '$(CurrentNugetPackageName)/$(NewVersion)' != '$(FoundVersionName)' " />
 
