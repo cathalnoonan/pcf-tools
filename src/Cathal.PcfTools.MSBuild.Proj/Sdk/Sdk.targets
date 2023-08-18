@@ -7,7 +7,7 @@
 
     <Target Name="Build">
         <MSBuild Targets="Build"
-                 Properties="Configuration=$(Configuration)"
+                 Properties="Configuration=$(Configuration);SolutionDistFolder=$(MSBuildProjectDirectory)\dist"
                  Projects="@(PacSolutionFiles)" />
     </Target>
 

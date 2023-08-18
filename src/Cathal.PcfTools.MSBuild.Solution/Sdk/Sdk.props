@@ -3,5 +3,6 @@
     <PropertyGroup>
         <CurrentNugetPackageName>Cathal.PcfTools.MSBuild.Solution</CurrentNugetPackageName>
         <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+        <SolutionDistFolder Condition=" '$(SolutionDistFolder)' == '' ">$(MSBuildProjectDirectory)\..\dist</SolutionDistFolder>
     </PropertyGroup>
 </Project>
