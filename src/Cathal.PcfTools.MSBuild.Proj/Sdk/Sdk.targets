@@ -20,6 +20,7 @@
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."
                Condition=" '$(NewVersion)' == '' " />
+        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(CurrentNugetPackageName)/$(NewVersion)'" />
 
         <PropertyGroup>
             <Namespace>
@@ -27,11 +28,14 @@
             </Namespace>
         </PropertyGroup>
 
-        <!-- Update Proj file -->
+        <!-- Update the project SDK -->
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
         <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Namespaces="$(Namespace)">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
+        <Message Importance="high" Text="Sdk version assigned in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
+        <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
+               Condition=" '$(CurrentNugetPackageName)/$(NewVersion)' != '$(FoundVersionName)' " />
 
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfToolsSdk"
@@ -43,11 +47,12 @@
     <Target Name="UpdatePcfTemplateFiles">
         <Message Importance="high" Text="Copying files from template folder..." />
         <ItemGroup>
-            <TemplateFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\**\*" />
+            <TemplateFiles Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\contentFiles'))\**\*" />
         </ItemGroup>
         <Copy SourceFiles="@(TemplateFiles)"
               DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
               SkipUnchangedFiles="true" />
+        <Message Importance="high" Text=" - Updated file: '$(MSBuildProjectDirectory)\$([MSBuild]::MakeRelative($(MSBuildThisFileDirectory)\..\contentFiles, %(TemplateFiles.Identity)))'" />
 
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfTemplateFiles"

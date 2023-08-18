@@ -41,6 +41,7 @@
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."
                Condition=" '$(NewVersion)' == '' " />
+        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(CurrentNugetPackageName)/$(NewVersion)'" />
 
         <PropertyGroup>
             <Namespace>
@@ -48,11 +49,14 @@
             </Namespace>
         </PropertyGroup>
 
-        <!-- Update Proj file -->
+        <!-- Update the project SDK -->
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
         <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Namespaces="$(Namespace)">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
+        <Message Importance="high" Text="Sdk version assigned in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
+        <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
+               Condition=" '$(CurrentNugetPackageName)/$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
     <Target Name="UpdatePcfTemplateFiles">
@@ -63,6 +67,7 @@
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."
                Condition=" '$(NewVersion)' == '' " />
+        <Message Importance="high" Text="Setting solution version to '$(NewVersion)' ..." />
 
         <ItemGroup>
             <SolutionXmlFiles Include="$(MSBuildProjectDirectory)\**\Solution.xml" />
@@ -75,6 +80,7 @@
         </PropertyGroup>
 
         <!-- <ImportExportXmlSolutionManifest> ... <SolutionManifest> ... <Version> -->
+        <Message Importance="high" Text="Setting version number in '%(SolutionXmlFiles.Identity)' to '$(NewVersion)'" />
         <XmlPoke XmlInputPath="%(SolutionXmlFiles.Identity)" Query="ImportExportXml/SolutionManifest/Version" Value="$(NewVersion)"
                  Namespaces="$(Namespace)" />
     </Target>
