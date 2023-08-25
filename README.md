@@ -23,24 +23,24 @@ The repo assumes a project uses the following folder structure:
 
 The `.proj` file should contain the following contents:
 
-```diff
-+  <?xml version="1.0" encoding="utf-8"?>
-+  <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.1" />
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.4" />
 ```
 
-**Note**: Replace `0.1.1` above with later versions as appropriate.
+**Note**: Replace `0.1.4` above with later versions as appropriate.
 
 ### control/
 
-The following change should be made in the `control.pcfproj` file:
+The following change should be made in the `control.cdsproj` file:
 
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.1">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.4">
 ```
 
-**Note**: Replace `0.1.1` above with later versions as appropriate.
+**Note**: Replace `0.1.4` above with later versions as appropriate.
 
 ### solution/
 
@@ -49,10 +49,10 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.1">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.4">
 ```
 
-**Note**: Replace `0.1.1` above with later versions as appropriate.
+**Note**: Replace `0.1.4` above with later versions as appropriate.
 
 ---
 
@@ -66,6 +66,7 @@ The following commands can be run from the folder where the `{project_name}.proj
   ```
 
 - Upgrading the tools from command line:
+  (replace `X.Y.Z` with the updated version number of this project)
   ```bash
   dotnet msbuild -t:UpdatePcfToolsSdk -p:NewVersion=X.Y.Z
   ```
@@ -76,6 +77,7 @@ The following commands can be run from the folder where the `{project_name}.proj
   ```
 
 - Set the version number consistently throughout the project:
+  (replace `X.Y.Z` with the version you would like to set your control to)
   ```bash
   dotnet msbuild -t:SetVersion -p:NewVersion=X.Y.Z
   ```
