@@ -50,3 +50,11 @@ jobs:
             exit 1
           fi
         shell: bash
+
+      # Test the other commands
+      - name: "Test: UpdatePcfPackagesVersion"
+        run: dotnet msbuild test -t:UpdatePcfPackagesVersion -p:NewVersion=1.26.5
+      - name: "Test: UpdatePcfTemplateFiles"
+        run: dotnet msbuild test -t:UpdatePcfTemplateFiles
+      - name: "Test: SetVersion"
+        run: dotnet msbuild test -t:SetVersion -p:NewVersion=1.2.3
