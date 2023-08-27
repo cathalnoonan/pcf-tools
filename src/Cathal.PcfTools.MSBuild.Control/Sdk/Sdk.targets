@@ -8,6 +8,32 @@
               WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
+    <Target Name="UpdatePcfPackagesVersion">
+        <!-- Make sure $(NewVersion) is passed -->
+        <Error Text="Required property 'NewVersion' property was not provieded."
+               Condition=" '$(NewVersion)' == '' " />
+
+        <!-- Update the npm packages -->
+        <Message Importance="high" Text="Installing 'pcf-scripts@$(NewVersion)' and 'pcf-start@$(NewVersion)' in '$(MSBuildProjectFullPath)." />
+        <Exec Command="npm install -d pcf-scripts@$(NewVersion) pcf-start@$(NewVersion)"
+              WorkingDirectory="$(MSBuildProjectDirectory)" />
+               
+        <!-- Update the NuGet package -->
+        <Message Importance="high" Text="Setting Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <PropertyGroup>
+            <Namespace>
+                <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
+            </Namespace>
+        </PropertyGroup>
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version" Namespaces="$(Namespace)">
+            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        </XmlPeek>
+        <Message Importance="high" Text="    ->  Microsoft.PowerApps.MSBuild.Pcf version in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
+        <Error Text="Unable to update Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)'."
+                Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+    </Target>
+
     <Target Name="UpdatePcfToolsSdk">
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."

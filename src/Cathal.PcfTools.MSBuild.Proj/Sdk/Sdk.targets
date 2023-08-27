@@ -18,6 +18,18 @@
               WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
+    <Target Name="UpdatePcfPackagesVersion">
+        <!-- Make sure $(NewVersion) is passed -->
+        <Error Text="Required property 'NewVersion' property was not provieded."
+               Condition=" '$(NewVersion)' == '' " />
+
+        <!-- Update other projects -->
+        <MSBuild Targets="UpdatePcfPackagesVersion"
+                 Properties="NewVersion=$(NewVersion)"
+                 Projects="@(ProjectFiles)"
+                 SkipNonexistentTargets="true" />
+    </Target>
+
     <Target Name="UpdatePcfToolsSdk">
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."

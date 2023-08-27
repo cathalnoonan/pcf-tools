@@ -65,6 +65,12 @@ The following commands can be run from the folder where the `{project_name}.proj
   dotnet build
   ```
 
+- Updating the PAC package versions used by the project:
+  (replace `X.Y.Z` with the updated version number with the version of the `pcf-scripts` package to install)
+  ```bash
+  dotnet msbuild -t:UpdatePcfPackagesVersion -p:NewVersion=X.Y.Z
+  ```
+
 - Upgrading the tools from command line:
   (replace `X.Y.Z` with the updated version number of this project)
   ```bash
