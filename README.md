@@ -25,10 +25,10 @@ The `.proj` file should contain the following contents:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.4" />
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.5" />
 ```
 
-**Note**: Replace `0.1.4` above with later versions as appropriate.
+**Note**: Replace `0.1.5` above with later versions as appropriate.
 
 ### control/
 
@@ -37,10 +37,10 @@ The following change should be made in the `control.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.4">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.5">
 ```
 
-**Note**: Replace `0.1.4` above with later versions as appropriate.
+**Note**: Replace `0.1.5` above with later versions as appropriate.
 
 ### solution/
 
@@ -49,10 +49,10 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
 - <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.4">
++ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Solution/0.1.5">
 ```
 
-**Note**: Replace `0.1.4` above with later versions as appropriate.
+**Note**: Replace `0.1.5` above with later versions as appropriate.
 
 ---
 
