@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Note: Not using the Sdk="..." import here so testing can be done without releasing a version -->
+  <!-- Note: Not using <Sdk Name="..." Version="..." /> in this file so testing can be done without releasing a version -->
   <Import Project="$(MSBuildThisFileDirectory)..\..\src\Cathal.PcfTools.MSBuild.Control\Sdk\Sdk.props" />
 
   <PropertyGroup>
@@ -46,7 +46,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets')" />
 
-  <!-- Note: Not using the Sdk="..." import here so testing can be done without releasing a version -->
+  <!-- Note: Not using <Sdk Name="..." Version="..." /> in this file so testing can be done without releasing a version -->
   <Import Project="$(MSBuildThisFileDirectory)..\..\src\Cathal.PcfTools.MSBuild.Control\Sdk\Sdk.targets" />
 
 </Project>

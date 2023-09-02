@@ -34,7 +34,7 @@
         <!-- Make sure $(NewVersion) is passed -->
         <Error Text="Required property 'NewVersion' property was not provieded."
                Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(CurrentNugetPackageName)/$(NewVersion)'" />
+        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
 
         <!-- Update the project SDK -->
         <PropertyGroup>
@@ -42,13 +42,13 @@
                 <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/@Sdk" Value="$(CurrentNugetPackageName)/$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/@Sdk" Namespaces="$(Namespace)">
+        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
+        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Namespaces="$(Namespace)">
             <Output TaskParameter="Result" PropertyName="FoundVersionName" />
         </XmlPeek>
         <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
         <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
-               Condition=" '$(CurrentNugetPackageName)/$(NewVersion)' != '$(FoundVersionName)' " />
+               Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
 
         <!-- Update other projects -->
         <MSBuild Targets="UpdatePcfToolsSdk"

@@ -13,8 +13,8 @@ The following change should be made in the `control.pcfproj` file:
 
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
-- <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+ <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Control/0.1.5">
+  <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++     <Sdk Name="Cathal.PcfTools.MSBuild.Control" Version="0.1.5" />
 ```
 
 **Note**: Replace `0.1.5` above with later versions as appropriate.
