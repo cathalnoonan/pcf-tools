@@ -1,0 +1,10 @@
+name: Missing translations
+description: Request translations for another language
+labels: [ "translation" ]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language
+    validations:
+      required: true
