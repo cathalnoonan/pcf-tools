@@ -1,0 +1,20 @@
+version: 2
+
+updates:
+  # Update github actions in this repo
+  - package-ecosystem: "github-actions"
+    commit-message:
+      prefix: "[github-actions] "
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+
+  # Update github actions for the consuming repos
+  - package-ecosystem: "github-actions"
+    commit-message:
+      prefix: "[github-actions] "
+    directory: "/src/Cathal.PcfTools/MSBuild.Proj/contentFiles/.github/workflows"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"

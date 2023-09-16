@@ -3,8 +3,14 @@ description: Request translations for another language
 labels: [ "translation" ]
 body:
   - type: input
-    id: language
+    id: language-name
     attributes:
-      label: Language
+      label: Language name
     validations:
       required: true
+  - type: input
+    id: language-code
+    attributes:
+      label: Language code (LCID)
+    validations:
+      required: false

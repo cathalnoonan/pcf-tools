@@ -12,8 +12,8 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
 jobs:
-  test:
-    name: Test
+  build:
+    name: Build
     strategy:
       fail-fast: false
       matrix:
