@@ -1,40 +1,48 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project>
     <Target Name="Restore">
-        <MSBuild Targets="Restore"
-                 Projects="@(ProjectFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="Restore"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="Build">
-        <MSBuild Targets="Build"
-                 Properties="Configuration=$(Configuration);SolutionDistFolder=$(MSBuildProjectDirectory)\dist"
-                 Projects="@(PacSolutionFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="Build"
+            Properties="Configuration=$(Configuration);SolutionDistFolder=$(MSBuildProjectDirectory)\dist"
+            Projects="@(PacSolutionFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="Clean">
-        <Exec Command="git clean -ffdX"
-              WorkingDirectory="$(MSBuildProjectDirectory)" />
+        <Exec
+            Command="git clean -ffdX"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
     <Target Name="UpdatePcfPackagesVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
 
         <!-- Update other projects -->
-        <MSBuild Targets="UpdatePcfPackagesVersion"
-                 Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="UpdatePcfPackagesVersion"
+            Properties="NewVersion=$(NewVersion)"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="UpdatePcfToolsSdk">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'"
+            Importance="high" />
 
         <!-- Update the project SDK -->
         <PropertyGroup>
@@ -42,48 +50,72 @@
                 <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Namespaces="$(Namespace)">
-            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        <XmlPoke
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
-        <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
-               Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+        <Message
+            Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'"
+            Importance="high" />
+        <Error
+            Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
+            Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
 
         <!-- Update other projects -->
-        <MSBuild Targets="UpdatePcfToolsSdk"
-                 Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="UpdatePcfToolsSdk"
+            Properties="NewVersion=$(NewVersion)"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 
 
     <Target Name="UpdatePcfTemplateFiles">
-        <Message Importance="high" Text="Copying files from template folder..." />
+        <Message
+            Text="Copying files from template folder..."
+            Importance="high" />
         <ItemGroup>
-            <TemplateFiles Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\contentFiles'))\**\*" />
+            <TemplateFiles
+                Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\contentFiles'))\**\*" />
         </ItemGroup>
-        <Copy SourceFiles="@(TemplateFiles)"
-              DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
-              SkipUnchangedFiles="true" />
-        <Message Importance="high" Text=" - Updated file: '$(MSBuildProjectDirectory)\$([MSBuild]::MakeRelative($(MSBuildThisFileDirectory)\..\contentFiles, %(TemplateFiles.Identity)))'" />
+        <Copy
+            SourceFiles="@(TemplateFiles)"
+            DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
+            SkipUnchangedFiles="true" />
+        <Message
+            Text=" - Updated file: '$(MSBuildProjectDirectory)\$([MSBuild]::MakeRelative($(MSBuildThisFileDirectory)\..\contentFiles, %(TemplateFiles.Identity)))'"
+            Importance="high" />
 
         <!-- Update other projects -->
-        <MSBuild Targets="UpdatePcfTemplateFiles"
-                 Projects="@(ProjectFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="UpdatePcfTemplateFiles"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 
     <Target Name="SetVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting the version number to $(NewVersion)..." />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting the version number to $(NewVersion)..."
+            Importance="high" />
 
         <!-- Update other projects -->
-        <MSBuild Targets="SetVersion"
-                 Properties="NewVersion=$(NewVersion)"
-                 Projects="@(ProjectFiles)"
-                 SkipNonexistentTargets="true" />
+        <MSBuild
+            Targets="SetVersion"
+            Properties="NewVersion=$(NewVersion)"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 </Project>

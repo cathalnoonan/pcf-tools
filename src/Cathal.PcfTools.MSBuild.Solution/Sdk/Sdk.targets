@@ -1,18 +1,24 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
     <!-- MSBuild target to set the solution name. -->
     <Target Name="SetSolutionZipName" BeforeTargets="PrepareForBuild">
         <!-- Get solution unique name -->
-        <XmlPeek XmlInputPath="$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml"
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml"
             Query="/ImportExportXml/SolutionManifest/UniqueName/text()">
-            <Output TaskParameter="Result" ItemName="temp_SolutionUniqueName" />
+            <Output
+                TaskParameter="Result"
+                ItemName="temp_SolutionUniqueName" />
         </XmlPeek>
 
         <!-- Get solution version -->
-        <XmlPeek XmlInputPath="$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml"
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml"
             Query="/ImportExportXml/SolutionManifest/Version/text()">
-            <Output TaskParameter="Result" ItemName="temp_SolutionVersionNumber" />
+            <Output
+                TaskParameter="Result"
+                ItemName="temp_SolutionVersionNumber" />
         </XmlPeek>
 
         <!-- Use the above variables and tasks to generate solution output path. -->
@@ -39,9 +45,12 @@
 
     <Target Name="UpdatePcfPackagesVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting Microsoft.PowerApps.MSBuild.Solution in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting Microsoft.PowerApps.MSBuild.Solution in '$(MSBuildProjectFullPath)' to '$(NewVersion)'"
+            Importance="high" />
 
         <!-- Update the NuGet package -->
         <PropertyGroup>
@@ -49,20 +58,35 @@
                 <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Solution']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Solution']/@Version" Namespaces="$(Namespace)">
-            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        <XmlPoke
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Solution']/@Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Solution']/@Version"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="    ->  Microsoft.PowerApps.MSBuild.Solution version in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
-        <Error Text="Unable to update Microsoft.PowerApps.MSBuild.Solution in '$(MSBuildProjectFullPath)'."
-                Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+        <Message
+            Text="    ->  Microsoft.PowerApps.MSBuild.Solution version in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'"
+            Importance="high" />
+        <Error
+            Text="Unable to update Microsoft.PowerApps.MSBuild.Solution in '$(MSBuildProjectFullPath)'."
+            Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
     <Target Name="UpdatePcfToolsSdk">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'"
+            Importance="high" />
 
         <!-- Update the project SDK -->
         <PropertyGroup>
@@ -70,20 +94,35 @@
                 <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Namespaces="$(Namespace)">
-            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        <XmlPoke
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
-        <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
-               Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+        <Message
+            Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'"
+            Importance="high" />
+        <Error
+            Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
+            Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
     <Target Name="SetVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting solution version to '$(NewVersion)' ..." />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting solution version to '$(NewVersion)' ..."
+            Importance="high" />
 
         <ItemGroup>
             <SolutionXmlFiles Include="$(MSBuildProjectDirectory)\**\Solution.xml" />
@@ -96,9 +135,14 @@
         </PropertyGroup>
 
         <!-- <ImportExportXmlSolutionManifest> ... <SolutionManifest> ... <Version> -->
-        <Message Importance="high" Text="Setting version number in '%(SolutionXmlFiles.Identity)' to '$(NewVersion)'" />
-        <XmlPoke XmlInputPath="%(SolutionXmlFiles.Identity)" Query="ImportExportXml/SolutionManifest/Version" Value="$(NewVersion)"
-                 Namespaces="$(Namespace)" />
+        <Message
+            Text="Setting version number in '%(SolutionXmlFiles.Identity)' to '$(NewVersion)'"
+            Importance="high" />
+        <XmlPoke
+            XmlInputPath="%(SolutionXmlFiles.Identity)"
+            Query="ImportExportXml/SolutionManifest/Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
     </Target>
 
 </Project>

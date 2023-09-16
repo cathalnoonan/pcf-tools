@@ -8,10 +8,14 @@ insert_final_newline = true
 
 # Json files
 [*.{json,jsonc}]
-indent_size = 4
+indent_size = 2
 
 # Xml files
-[*.{xml,proj,csproj,props,targets}]
+[*.xml]
+indent_size = 2
+
+# MSBuild files
+[*.{proj,csproj,props,targets}]
 indent_size = 4
 
 # Yaml files
