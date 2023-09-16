@@ -1,44 +1,71 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project>
     <Target Name="Restore">
-        <Message Importance="high" Text="Restoring npm packages" />
-        <Exec Command="npm install --no-audit --ignore-scripts --no-fund"
-              WorkingDirectory="$(MSBuildProjectDirectory)" />
-        <Exec Command="npm audit --omit=dev"
-              WorkingDirectory="$(MSBuildProjectDirectory)" />
+        <Message
+            Text="Restoring npm packages"
+            Importance="high" />
+        <Exec
+            Command="npm install --no-audit --ignore-scripts --no-fund"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
+        <Exec
+            Command="npm audit --omit=dev"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
     <Target Name="UpdatePcfPackagesVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
 
         <!-- Update the npm packages -->
-        <Message Importance="high" Text="Installing 'pcf-scripts@$(NewVersion)' and 'pcf-start@$(NewVersion)' in '$(MSBuildProjectFullPath)." />
-        <Exec Command="npm install -d pcf-scripts@$(NewVersion) pcf-start@$(NewVersion)"
-              WorkingDirectory="$(MSBuildProjectDirectory)" />
-               
+        <Message
+            Text="Installing 'pcf-scripts@$(NewVersion)' and 'pcf-start@$(NewVersion)' in '$(MSBuildProjectFullPath)."
+            Importance="high" />
+        <Exec
+            Command="npm install -d pcf-scripts@$(NewVersion) pcf-start@$(NewVersion)"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
+
         <!-- Update the NuGet package -->
-        <Message Importance="high" Text="Setting Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <Message
+            Text="Setting Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)' to '$(NewVersion)'"
+            Importance="high" />
         <PropertyGroup>
             <Namespace>
-                <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
+                <Namespace
+                    Prefix="dn"
+                    Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version" Namespaces="$(Namespace)">
-            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        <XmlPoke
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:ItemGroup/dn:PackageReference[@Include='Microsoft.PowerApps.MSBuild.Pcf']/@Version"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="    ->  Microsoft.PowerApps.MSBuild.Pcf version in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
-        <Error Text="Unable to update Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)'."
-                Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+        <Message
+            Text="    ->  Microsoft.PowerApps.MSBuild.Pcf version in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'"
+            Importance="high" />
+        <Error
+            Text="Unable to update Microsoft.PowerApps.MSBuild.Pcf in '$(MSBuildProjectFullPath)'."
+            Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
     <Target Name="UpdatePcfToolsSdk">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'" />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting Sdk in '$(MSBuildProjectFullPath)' to '$(NewVersion)'"
+            Importance="high" />
 
         <!-- Update the project SDK -->
         <PropertyGroup>
@@ -46,44 +73,71 @@
                 <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/developer/msbuild/2003" />
             </Namespace>
         </PropertyGroup>
-        <XmlPoke XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Value="$(NewVersion)" Namespaces="$(Namespace)" />
-        <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version" Namespaces="$(Namespace)">
-            <Output TaskParameter="Result" PropertyName="FoundVersionName" />
+        <XmlPoke
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Value="$(NewVersion)"
+            Namespaces="$(Namespace)" />
+        <XmlPeek
+            XmlInputPath="$(MSBuildProjectFile)"
+            Query="/dn:Project/dn:Sdk[@Name='$(CurrentNugetPackageName)']/@Version"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="FoundVersionName" />
         </XmlPeek>
-        <Message Importance="high" Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'" />
-        <Error Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
-               Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
+        <Message
+            Text="    ->  Sdk in '$(MSBuildProjectFullPath)' is now '$(FoundVersionName)'"
+            Importance="high" />
+        <Error
+            Text="Unable to update Sdk in '$(MSBuildProjectFullPath)'."
+            Condition=" '$(NewVersion)' != '$(FoundVersionName)' " />
     </Target>
 
     <Target Name="UpdatePcfTemplateFiles">
         <ItemGroup>
-            <TemplateFiles Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\contentFiles'))\**\*" />
+            <TemplateFiles
+                Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..\contentFiles'))\**\*" />
         </ItemGroup>
-        <Copy SourceFiles="@(TemplateFiles)"
-              DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
-              SkipUnchangedFiles="true" />
-        <Message Importance="high" Text=" - Updated file: '$(MSBuildProjectDirectory)\$([MSBuild]::MakeRelative($(MSBuildThisFileDirectory)\..\contentFiles, %(TemplateFiles.Identity)))'" />
+        <Copy
+            SourceFiles="@(TemplateFiles)"
+            DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)"
+            SkipUnchangedFiles="true" />
+        <Message
+            Text=" - Updated file: '$(MSBuildProjectDirectory)\$([MSBuild]::MakeRelative($(MSBuildThisFileDirectory)\..\contentFiles, %(TemplateFiles.Identity)))'"
+            Importance="high" />
     </Target>
 
     <Target Name="SetVersion">
         <!-- Make sure $(NewVersion) is passed -->
-        <Error Text="Required property 'NewVersion' property was not provieded."
-               Condition=" '$(NewVersion)' == '' " />
-        <Message Importance="high" Text="Setting control version to '$(NewVersion)' ..." />
+        <Error
+            Text="Required property 'NewVersion' property was not provieded."
+            Condition=" '$(NewVersion)' == '' " />
+        <Message
+            Text="Setting control version to '$(NewVersion)' ..."
+            Importance="high" />
 
         <ItemGroup>
-            <ControlManifestInputFiles Include="$(MSBuildProjectDirectory)\**\ControlManifest.Input.xml" />
+            <ControlManifestInputFiles
+                Include="$(MSBuildProjectDirectory)\**\ControlManifest.Input.xml" />
         </ItemGroup>
 
         <!-- <manifest> ... <control version="..."> -->
-        <XmlPoke XmlInputPath="%(ControlManifestInputFiles.Identity)" Query="manifest/control/@version" Value="$(NewVersion)" />
+        <XmlPoke
+            XmlInputPath="%(ControlManifestInputFiles.Identity)"
+            Query="manifest/control/@version"
+            Value="$(NewVersion)" />
 
         <!-- <manifest> ... <control> ... <resources> ... <resx version="..." /> -->
-        <XmlPoke XmlInputPath="%(ControlManifestInputFiles.Identity)" Query="manifest/control/resources/resx/@version" Value="$(NewVersion)" />
+        <XmlPoke
+            XmlInputPath="%(ControlManifestInputFiles.Identity)"
+            Query="manifest/control/resources/resx/@version"
+            Value="$(NewVersion)" />
 
         <!-- package.json: version -->
         <!-- package-lock.json: version -->
-        <Exec Command="npm version $(NewVersion) --allow-same-version true --git-tag-version false"
-              WorkingDirectory="$(MSBuildProjectDirectory)"/>
+        <Exec
+            Command="npm version $(NewVersion) --allow-same-version true --git-tag-version false"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 </Project>
