@@ -18,7 +18,7 @@ jobs:
     steps:
       # Setup
       - name: "Setup: Checkout the repo"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Setup: Setup dotnet"
         uses: actions/setup-dotnet@v3
       - name: "Setup: Node"
