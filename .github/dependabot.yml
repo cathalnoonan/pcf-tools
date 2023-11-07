@@ -14,7 +14,7 @@ updates:
   - package-ecosystem: "github-actions"
     commit-message:
       prefix: "[github-actions] "
-    directory: "/src/Cathal.PcfTools/MSBuild.Proj/contentFiles/.github/workflows"
+    directory: "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.github/workflows"
     schedule:
       interval: "weekly"
     target-branch: "main"
