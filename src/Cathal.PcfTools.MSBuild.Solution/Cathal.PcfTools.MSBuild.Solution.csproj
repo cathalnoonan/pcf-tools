@@ -4,23 +4,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <NoWarn>$(NoWarn);NU5128</NoWarn>
-
-        <!-- NuGet package information -->
         <PackageId>$(CurrentNugetPackageName)</PackageId>
-        <Version>0.0.0</Version>
-        <Authors>cathalnoonandev</Authors>
-        <Company></Company>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    </PropertyGroup>
-
-    <!-- Don't build or include any DLLs in this project -->
-    <PropertyGroup>
-        <NoBuild>true</NoBuild>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
-        <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,17 +13,6 @@
 
         <!-- Include README in the package -->
         <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath="/" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <!--
-            Include GitHub repository information in generated nupkg.
-            See here: https://devblogs.microsoft.com/nuget/introducing-source-code-link-for-nuget-packages/
-        -->
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-        </PackageReference>
     </ItemGroup>
 
 </Project>
