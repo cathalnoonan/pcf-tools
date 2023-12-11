@@ -16,7 +16,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: control/package-lock.json
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
 
       # Build solution
       # - https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables
