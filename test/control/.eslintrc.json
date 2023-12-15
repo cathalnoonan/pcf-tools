@@ -20,5 +20,16 @@
     ],
     "rules": {
       "no-unused-vars": "off"
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__mocks__/**",
+          "**/__tests__/**"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
 }
