@@ -12,8 +12,14 @@
             WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
+    <Target Name="Build">
+        <Exec
+            Command="npm run build"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
+    </Target>
+
     <Target Name="VSTest" DependsOnTargets="Test" />
-    <Target Name="Test">
+    <Target Name="Test" DependsOnTargets="Build">
         <Exec
             Command="npm run test --if-present"
             WorkingDirectory="$(MSBuildProjectDirectory)" />
