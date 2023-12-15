@@ -15,6 +15,15 @@
             SkipNonexistentTargets="true" />
     </Target>
 
+    <Target Name="VSTest" DependsOnTargets="Test" />
+    <Target Name="Test">
+        <MSBuild
+            Targets="Test"
+            Properties="Configuration=$(Configuration)"
+            Projects="@(ProjectFiles)"
+            SkipNonexistentTargets="true" />
+    </Target>
+
     <Target Name="Clean">
         <Exec
             Command="git clean -ffdX"

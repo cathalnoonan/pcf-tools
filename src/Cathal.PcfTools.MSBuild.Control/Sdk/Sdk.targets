@@ -12,6 +12,13 @@
             WorkingDirectory="$(MSBuildProjectDirectory)" />
     </Target>
 
+    <Target Name="VSTest" DependsOnTargets="Test" />
+    <Target Name="Test">
+        <Exec
+            Command="npm run test --if-present"
+            WorkingDirectory="$(MSBuildProjectDirectory)" />
+    </Target>
+
     <Target Name="UpdatePcfPackagesVersion">
         <!-- Make sure $(NewVersion) is passed -->
         <Error
