@@ -42,7 +42,7 @@ jobs:
 
       # Build
       - name: "Test: Run tests in the test folder"
-        run: dotnet test
+        run: dotnet test --no-build
         working-directory: test
         shell: bash
 
