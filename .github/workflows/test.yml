@@ -36,7 +36,14 @@ jobs:
 
       # Build
       - name: "Build: Build the test folder"
-        run: dotnet build test
+        run: dotnet build
+        working-directory: test
+        shell: bash
+
+      # Build
+      - name: "Test: Run tests in the test folder"
+        run: dotnet test
+        working-directory: test
         shell: bash
 
       # Validate

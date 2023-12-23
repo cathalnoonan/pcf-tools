@@ -19,7 +19,9 @@
     </Target>
 
     <Target Name="VSTest" DependsOnTargets="Test" />
-    <Target Name="Test" DependsOnTargets="Build">
+    <Target Name="Test">
+        <!-- Support passing the no-build argument -->
+        <CallTarget Condition="'$(VSTestNoBuild)' != 'true'" Targets="Build" />
         <Exec
             Command="npm run test --if-present"
             WorkingDirectory="$(MSBuildProjectDirectory)" />
