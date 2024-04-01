@@ -14,8 +14,8 @@ The `.proj` file should contain the following contents:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="0.1.15" />
+  <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="0.1.16" />
 </Project>
 ```
 
-**Note**: Replace `0.1.15` above with later versions as appropriate.
+**Note**: Replace `0.1.16` above with later versions as appropriate.
