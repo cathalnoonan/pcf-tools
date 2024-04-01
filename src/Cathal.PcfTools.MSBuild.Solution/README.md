@@ -20,7 +20,7 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
   <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="0.1.15" />
++     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="0.1.16" />
 ```
 
-**Note**: Replace `0.1.15` above with later versions as appropriate.
+**Note**: Replace `0.1.16` above with later versions as appropriate.
