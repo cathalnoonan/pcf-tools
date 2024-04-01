@@ -1,0 +1,64 @@
+name: Create Pull Requests
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  create_prs:
+    name: ${{ matrix.repo_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        repo_name:
+          - cathalnoonan/d365-pcf-charactersremaining
+          - cathalnoonan/d365-pcf-imagecontrol
+          - cathalnoonan/d365-pcf-processsessions
+          - cathalnoonan/d365-pcf-securityprofilemanager
+          - cathalnoonan/d365-pcf-securityrolemanager
+          - cathalnoonan/d365-pcf-truncatednumber
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Configure: Environment variables"
+        run: |
+          version=${GITHUB_REF##*/v}
+          echo "Version=${version}" >> $GITHUB_ENV
+          echo "BranchNameForPullRequest=update_pcf_tools_v${version}" >> $GITHUB_ENV
+      - name: "Configure: git committer"
+        run: |
+          git config --global user.name "[pcf-tools]"
+          git config --global user.email "you@example.com"
+      - name: "Git: Clone ${{ matrix.repo_name }}"
+        run: |
+          git clone \
+            --depth=1 \
+            --branch=main \
+            https://cathalnoonan:${{ secrets.PULL_REQUEST_TOKEN }}@github.com/${{ matrix.repo_name }} \
+            .
+      - name: "Git: Create branch"
+        run: |
+          git checkout -b ${{ env.BranchNameForPullRequest }}
+      - name: "PcfTools: Update PcfTools packages in projects"
+        run: |
+          dotnet msbuild -t:UpdatePcfToolsSdk -p:NewVersion=${{ env.Version }}
+      - name: "PcfTools: Apply new template files"
+        run: |
+          dotnet msbuild -t:UpdatePcfTemplateFiles
+      - name: "Git: Commit changes"
+        run: |
+          git add .
+          git commit -m '[build]: Update PCF Tools packages to v${{ env.Version }}'
+          git push -u origin ${{ env.BranchNameForPullRequest }}
+      - name: "GitHub: Authenticate"
+        run: |
+          echo "${{ secrets.PULL_REQUEST_TOKEN }}" > token.txt
+          gh auth login --with-token < token.txt
+          rm -rf ./token.txt
+      - name: "GitHub: Create PR to main branch"
+        run: |
+          gh pr create \
+            --body "" \
+            --title "[build]: Update PCF Tools packages to v${{ env.Version }}" \
+            --head "${{ env.BranchNameForPullRequest }}" \
+            --base "main"
