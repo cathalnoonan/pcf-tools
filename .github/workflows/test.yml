@@ -23,7 +23,6 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
-      # Setup
       - name: "Setup: Checkout the repo"
         uses: actions/checkout@v4
       - name: "Setup: Setup dotnet"
@@ -31,22 +30,17 @@ jobs:
       - name: "Setup: Node"
         uses: actions/setup-node@v4
         with:
-          # Use the .nvmrc file from the package contents
           node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
-
-      # Build
       - name: "Build: Build the test folder"
-        run: dotnet build
+        run: |
+          dotnet build
         working-directory: test
         shell: bash
-
-      # Build
       - name: "Test: Run tests in the test folder"
-        run: dotnet test --no-build
+        run: |
+          dotnet test --no-build
         working-directory: test
         shell: bash
-
-      # Validate
       - name: "Validate: Check managed solution exists"
         run: |-
           file_path="$(pwd)/test/dist/sample_solution_0_1_2_managed.zip"
@@ -57,17 +51,19 @@ jobs:
             exit 1
           fi
         shell: bash
-
-      # Test the other commands
       - name: "Test: dotnet test"
-        run: dotnet test
+        run: |
+          dotnet test
         working-directory: test
       - name: "Test: UpdatePcfPackagesVersion"
-        run: dotnet msbuild test -t:UpdatePcfPackagesVersion -p:NewVersion=1.26.5
+        run: |
+          dotnet msbuild test -t:UpdatePcfPackagesVersion -p:NewVersion=1.26.5
       - name: "Test: UpdatePcfTemplateFiles"
-        run: dotnet msbuild test -t:UpdatePcfTemplateFiles
+        run: |
+          dotnet msbuild test -t:UpdatePcfTemplateFiles
       - name: "Test: SetVersion"
-        run: dotnet msbuild test -t:SetVersion -p:NewVersion=1.2.3
+        run: |
+          dotnet msbuild test -t:SetVersion -p:NewVersion=1.2.3
 
   validate-editor-config:
     name: Validate editor config
@@ -78,9 +74,10 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          # Use the .nvmrc file from the package contents
           node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
-      - name: Setup editorconfig-checker
-        run: npm i -g editorconfig-checker
-      - name: Run editorconfig-checker
-        run: editorconfig-checker
+      - name: "Setup: editorconfig-checker"
+        run: |
+          npm i -g editorconfig-checker
+      - name: "Validate: Run editorconfig-checker"
+        run: |
+          editorconfig-checker

@@ -20,13 +20,11 @@ jobs:
     name: Create draft release
     runs-on: ubuntu-latest
     steps:
-      # Setup
       - name: "Setup: Checkout"
         uses: actions/checkout@v4
       - name: "Setup: setup-node"
         uses: actions/setup-node@v4
         with:
-          # Use the .nvmrc file from the package contents
           node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
       - name: "Setup: setup-dotnet"
         uses: actions/setup-dotnet@v4
@@ -38,20 +36,17 @@ jobs:
             sudo apt -y update
             sudo apt -y install zip
           fi
-
-      # Configure environment variables
       - name: "Configure: Version"
-        run: echo "Version=${GITHUB_REF##*/v}" >> $GITHUB_ENV
-
-      # Pack and publish
+        run: |
+          echo "Version=${GITHUB_REF##*/v}" >> $GITHUB_ENV
       - name: "Pack: dotnet pack src"
-        run: dotnet pack src
+        run: |
+          dotnet pack src
       - name: "Publish: dotnet publish src"
-        run: dotnet publish src
+        run: |
+          dotnet publish src
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
-
-      # Create draft release
       - name: "GitHub: Create draft release"
         uses: softprops/action-gh-release@v2
         with:
