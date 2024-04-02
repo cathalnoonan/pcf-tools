@@ -1,4 +1,4 @@
-name: Draft release
+name: Release
 run-name: ${{ github.ref_name }}
 
 on:
@@ -16,8 +16,8 @@ permissions:
   contents: write
 
 jobs:
-  draft_release:
-    name: Draft release
+  create_draft_release:
+    name: Create draft release
     runs-on: ubuntu-latest
     steps:
       # Setup
