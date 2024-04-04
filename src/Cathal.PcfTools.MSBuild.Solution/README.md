@@ -1,4 +1,4 @@
-# Cathal.PcfTools.MSBuild.Solution
+﻿# Cathal.PcfTools.MSBuild.Solution
 
 This package contains MSBuild targets to build the PowerApps Component Framework solution with the common naming format.
 
@@ -20,7 +20,7 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
   <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="0.1.16" />
++     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="{{version_number}}" />
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `{{version_number}}` above with later versions as appropriate.
