@@ -61,4 +61,5 @@ jobs:
             --body "" \
             --title "[build]: Update PCF Tools packages to v${{ env.Version }}" \
             --head "${{ env.BranchNameForPullRequest }}" \
+            --label "dependencies" \
             --base "main"
