@@ -39,6 +39,9 @@ jobs:
       - name: "Configure: Version"
         run: |
           echo "Version=${GITHUB_REF##*/v}" >> $GITHUB_ENV
+      - name: "Replace: Replace version number in README files"
+        run: |
+          dotnet msbuild src -t:SetVersions -p:Version=${{ env.Version }}
       - name: "Pack: dotnet pack src"
         run: |
           dotnet pack src
