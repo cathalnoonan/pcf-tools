@@ -1,4 +1,4 @@
-# Cathal.PcfTools.MSBuild.Proj
+﻿# Cathal.PcfTools.MSBuild.Proj
 
 This package contains MSBuild targets to wrap the common actions for building a PowerApps Component Framework project.
 
@@ -14,8 +14,8 @@ The `.proj` file should contain the following contents:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="0.1.16" />
+  <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="{{version_number}}" />
 </Project>
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `{{version_number}}` above with later versions as appropriate.

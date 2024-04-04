@@ -1,4 +1,4 @@
-# Cathal.PcfTools.MSBuild.Control
+﻿# Cathal.PcfTools.MSBuild.Control
 
 This package contains MSBuild targets to populate configuration files in PCF control projects
 
@@ -14,7 +14,7 @@ The following change should be made in the `control.pcfproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
   <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+     <Sdk Name="Cathal.PcfTools.MSBuild.Control" Version="0.1.16" />
++     <Sdk Name="Cathal.PcfTools.MSBuild.Control" Version="{{version_number}}" />
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `{{version_number}}` above with later versions as appropriate.

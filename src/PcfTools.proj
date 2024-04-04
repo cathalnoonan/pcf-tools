@@ -3,6 +3,7 @@
     <PropertyGroup>
         <Version Condition="'$(Version)'==''">0.0.0</Version>
         <NuGetPackageSource Condition="'$(NugetPackageSource)'==''">https://api.nuget.org/v3/index.json</NuGetPackageSource>
+        <SwapDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\swap'))</SwapDir>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,6 +26,37 @@
             Importance="high" />
         <Exec
             Command="dotnet nuget push &quot;$(MSBuildThisFileDirectory)../dist/%(NuGetPackages.Identity).$(Version).nupkg&quot; --source $(NuGetPackageSource) --skip-duplicate --api-key $(NuGetApiKey)" />
+    </Target>
+
+    <Target Name="SetVersions">
+        <Message
+            Text="Setting version numbers"
+            Importance="high" />
+    </Target>
+    <Target Name="SetVersions:Markdown" AfterTargets="SetVersions">
+        <Message
+            Text="  Setting version numbers in markdown files"
+            Importance="high" />
+        <ItemGroup>
+            <Files
+                Include="$(MSBuildProjectDirectory)\**\*.md" />
+        </ItemGroup>
+        <MakeDir
+            Directories="$(SwapDir)"/>
+        <Copy
+            SourceFiles="@(Files)"
+            DestinationFolder="$(SwapDir)\%(RecursiveDir)">
+            <Output
+                TaskParameter="CopiedFiles"
+                ItemName="BackupCopiedFiles" />
+        </Copy>
+        <WriteLinesToFile
+            File="%(Files.Identity)"
+            Lines="$([System.IO.File]::ReadAllText('%(Files.Identity)').Replace('{{version_number}}','$(Version)'))"
+            Overwrite="true"
+            Encoding="UTF-8" />
+        <RemoveDir
+            Directories="$(SwapDir)" />
     </Target>
 
 </Project>
