@@ -49,7 +49,7 @@ jobs:
         run: |
           dotnet msbuild -t:IncludeGitHubRepositoryUrl
         env:
-          GitHubRepositoryUrl: "${{ github.server_url }}/${{ github.repository }}"
+          GitHubRepositoryUrl: "${{ github.server_url }}/${{ matrix.repo_name }}"
       - name: "Git: Commit changes"
         run: |
           git add .
