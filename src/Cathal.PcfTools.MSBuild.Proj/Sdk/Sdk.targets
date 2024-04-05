@@ -127,4 +127,18 @@
             Projects="@(ProjectFiles)"
             SkipNonexistentTargets="true" />
     </Target>
+
+    <Target Name="IncludeGitHubRepositoryUrl">
+        <!-- Make sure $(GitHubRepositoryUrl) is passed -->
+        <Error
+            Text="Required property 'GitHubRepositoryUrl' property was not provieded."
+            Condition=" '$(GitHubRepositoryUrl)' == '' " />
+
+        <!-- Update other projects -->
+        <MSBuild
+            Targets="IncludeGitHubRepositoryUrl"
+            Properties="GitHubRepositoryUrl=$(GitHubRepositoryUrl)"
+            Projects="@(PacSolutionFiles)"
+            SkipNonexistentTargets="true" />
+    </Target>
 </Project>

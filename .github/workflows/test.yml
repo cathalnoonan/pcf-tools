@@ -64,6 +64,15 @@ jobs:
       - name: "Test: SetVersion"
         run: |
           dotnet msbuild test -t:SetVersion -p:NewVersion=1.2.3
+      - name: "Test: IncludeGitHubRepositoryUrl"
+        run: |
+          dotnet msbuild test -t:IncludeGitHubRepositoryUrl -p:GitHubRepositoryUrl=${{ github.server_url }}/${{ github.repository }}
+      - name: "Test: Print git status"
+        run: |
+          git --no-pager status
+      - name: "Test: Print git diff"
+        run: |
+          git --no-pager diff
 
   validate-editor-config:
     name: Validate editor config
