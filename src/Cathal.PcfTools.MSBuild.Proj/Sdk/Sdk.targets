@@ -136,7 +136,9 @@
 
         <!-- Update other projects -->
         <MSBuild
-            Targets=""
-            Properties="GitHubRepositoryUrl=$(GitHubRepositoryUrl)" />
+            Targets="IncludeGitHubRepositoryUrl"
+            Properties="GitHubRepositoryUrl=$(GitHubRepositoryUrl)"
+            Projects="@(PacSolutionFiles)"
+            SkipNonexistentTargets="true" />
     </Target>
 </Project>
