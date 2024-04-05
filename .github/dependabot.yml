@@ -23,6 +23,15 @@ updates:
   - package-ecosystem: "devcontainers"
     commit-message:
       prefix: "[devcontainer] "
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+
+  # Update devcontainer for the consuming repos
+  - package-ecosystem: "devcontainers"
+    commit-message:
+      prefix: "[devcontainer] "
     directory: "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/"
     schedule:
       interval: "weekly"
