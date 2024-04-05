@@ -45,6 +45,11 @@ jobs:
       - name: "PcfTools: Apply new template files"
         run: |
           dotnet msbuild -t:UpdatePcfTemplateFiles
+      - name: "PcfTools: Append repository url to description"
+        run: |
+          dotnet msbuild -t:IncludeGitHubRepositoryUrl
+        env:
+          GitHubRepositoryUrl: "${{ github.server_url }}/${{ github.repository }}"
       - name: "Git: Commit changes"
         run: |
           git add .

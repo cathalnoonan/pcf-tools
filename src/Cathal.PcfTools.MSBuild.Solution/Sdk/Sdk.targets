@@ -145,4 +145,48 @@
             Namespaces="$(Namespace)" />
     </Target>
 
+    <Target Name="IncludeGitHubRepositoryUrl">
+        <ItemGroup>
+            <SolutionXmlFiles Include="$(MSBuildProjectDirectory)\**\Solution.xml" />
+        </ItemGroup>
+        <PropertyGroup>
+            <Namespace>
+                <Namespace Prefix="" Uri="http://www.w3.org/2001/XMLSchema-instance" />
+                <Namespace Prefix="xsi" Uri="http://www.w3.org/2001/XMLSchema-instance" />
+            </Namespace>
+        </PropertyGroup>
+
+        <!-- Example:
+            <ImportExportXml ...>
+                <SolutionManifest>
+                    <LocalizedNames>
+                        <LocalizedName description="$(GitHubRepositoryUrl)" languagecode="1033" />
+                    </LocalizedNames>
+                </SolutionManifest>
+            </ImportExportXml>
+        -->
+        <XmlPeek
+            XmlInputPath="%(SolutionXmlFiles.Identity)"
+            Query="/ImportExportXml/SolutionManifest/LocalizedNames/LocalizedName[@languagecode='1033']/@description"
+            Namespaces="$(Namespace)">
+            <Output
+                TaskParameter="Result"
+                PropertyName="SolutionDescription" />
+        </XmlPeek>
+        <PropertyGroup>
+            <NewSolutionDescription Condition=" '$(SolutionDescription)' == '' ">$(GitHubRepositoryUrl)</NewSolutionDescription>
+            <NewSolutionDescription Condition=" '$(SolutionDescription)' != '' ">$(SolutionDescription). $(GitHubRepositoryUrl)</NewSolutionDescription>
+        </PropertyGroup>
+        <Message
+            Text="Setting to solution description in '%(SolutionXmlFiles.Identity)'..."
+            Importance="high"
+            Condition=" '$(SolutionDescription.Contains($(GitHubRepositoryUrl)))' == 'false' " />
+        <XmlPoke
+            XmlInputPath="%(SolutionXmlFiles.Identity)"
+            Query="/ImportExportXml/SolutionManifest/LocalizedNames/LocalizedName[@languagecode='1033']/@description"
+            Value="$(NewSolutionDescription)"
+            Namespaces="$(Namespace)"
+            Condition=" '$(SolutionDescription.Contains($(GitHubRepositoryUrl)))' == 'false' " />
+    </Target>
+
 </Project>
