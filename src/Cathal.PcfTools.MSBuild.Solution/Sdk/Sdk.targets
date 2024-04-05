@@ -145,7 +145,7 @@
             Namespaces="$(Namespace)" />
     </Target>
 
-    <Target Name="IncludeGitHubRepositoryUrl">
+    <Target Name="IncludeGitHubRepositoryUrl" Condition=" '$(GitHubRepositoryUrl)' != '' ">
         <ItemGroup>
             <SolutionXmlFiles Include="$(MSBuildProjectDirectory)\**\Solution.xml" />
         </ItemGroup>
