@@ -1,0 +1,24 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "6.0"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "remoteEnv": {
+    "DOTNET_NOLOGO": "1",
+
+    // https://github.com/microsoft/powerplatform-vscode/issues/139
+    "DOTNET_ROLL_FORWARD": "Major"
+  },
+  "forwardPorts": [8181]
+}
