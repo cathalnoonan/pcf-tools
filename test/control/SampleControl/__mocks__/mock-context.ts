@@ -16,6 +16,7 @@ export class MockContext<T> implements ComponentFramework.Context<T> {
       getClient: jest.fn(),
       getFormFactor: jest.fn(),
       isOffline: jest.fn(),
+      isNetworkAvailable: jest.fn(),
     };
 
     // Canvas apps currently assigns a positive tab-index
