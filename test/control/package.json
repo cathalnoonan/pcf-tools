@@ -10,7 +10,7 @@
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
     "refreshTypes": "pcf-scripts refreshTypes",
-    "test": "jest --collectCoverage"
+    "test": "jest --collectCoverage --coverageDirectory ../dist/coverage"
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-power-apps": "^0.2.6",
