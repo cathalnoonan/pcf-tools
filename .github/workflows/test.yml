@@ -31,9 +31,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
+      - name: "Build: Restore the test folder"
+        run: |
+          dotnet restore
+        working-directory: test
+        shell: bash
       - name: "Build: Build the test folder"
         run: |
-          dotnet build
+          dotnet build --no-restore
         working-directory: test
         shell: bash
       - name: "Test: Run tests in the test folder"
