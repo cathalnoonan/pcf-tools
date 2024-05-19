@@ -1,18 +1,20 @@
 {
     "cSpell.words": [
-        "Cathal",
-        "cdsproj",
-        "customizer",
-        "devcontainers",
-        "eamodio",
-        "gifs",
-        "LCID",
-        "msbuild",
-        "NOLOGO",
-        "Noonan",
-        "pcfproj",
-        "powerapps",
-        "Unmanaged"
+      "Cathal",
+      "cdsproj",
+      "customizer",
+      "devcontainer",
+      "devcontainers",
+      "eamodio",
+      "gifs",
+      "LCID",
+      "msbuild",
+      "NOLOGO",
+      "Noonan",
+      "pcfproj",
+      "powerapps",
+      "powercat",
+      "Unmanaged"
     ],
     "workbench.colorCustomizations": {
         "activityBar.background": "#072900",
