@@ -12,6 +12,6 @@ do
   git checkout "${branch}"
   git rebase main
   git push --force-with-lease
+  git checkout main
+  git branch -D "${branch}"
 done
-
-git checkout main
