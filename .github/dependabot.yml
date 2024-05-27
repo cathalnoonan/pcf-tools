@@ -1,38 +1,24 @@
 version: 2
 
 updates:
-  # Update github actions in this repo
+  # Update github actions
   - package-ecosystem: "github-actions"
     commit-message:
       prefix: "[github-actions] "
-    directory: "/"
+    directories:
+      - "/"
+      - "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.github/workflows"
     schedule:
       interval: "weekly"
     target-branch: "main"
 
-  # Update github actions for the consuming repos
-  - package-ecosystem: "github-actions"
-    commit-message:
-      prefix: "[github-actions] "
-    directory: "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.github/workflows"
-    schedule:
-      interval: "weekly"
-    target-branch: "main"
-
-  # Update devcontainer for the consuming repos
+  # Update devcontainer
   - package-ecosystem: "devcontainers"
     commit-message:
       prefix: "[devcontainer] "
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    target-branch: "main"
-
-  # Update devcontainer for the consuming repos
-  - package-ecosystem: "devcontainers"
-    commit-message:
-      prefix: "[devcontainer] "
-    directory: "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/"
+    directories:
+      - "/"
+      - "/src/Cathal.PcfTools.MSBuild.Proj/contentFiles/"
     schedule:
       interval: "weekly"
     target-branch: "main"
