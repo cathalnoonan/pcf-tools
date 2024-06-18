@@ -7,7 +7,6 @@ on:
     paths:
       - ".devcontainer/**"
       - ".github/workflows/devcontainer.yml"
-      - "compose.yml"
 
 jobs:
   devcontainer:
