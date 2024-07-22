@@ -2,6 +2,11 @@ name: Validate RESX Files
 
 on:
   push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/validate-resx-files.yml"
+      - "**/*.resx"
   pull_request:
 
 jobs:

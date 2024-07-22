@@ -2,6 +2,8 @@ name: EditorConfig Checker
 
 on:
   push:
+    branches:
+      - "**"
   pull_request:
 
 jobs:
