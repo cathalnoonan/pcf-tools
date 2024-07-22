@@ -37,7 +37,7 @@ jobs:
               echo "Invalid: $resx_file" && error=1
             fi
           done
-          if [[ "${error}" == "0" ]]
+          if [[ "${error}" == "1" ]]
           then
             exit 1
           fi
