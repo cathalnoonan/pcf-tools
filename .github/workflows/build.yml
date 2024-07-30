@@ -1,4 +1,4 @@
-name: Test
+name: Build
 
 on:
   push:
@@ -85,20 +85,3 @@ jobs:
           path: ./test/dist/*
           retention-days: 15
         if: matrix.os == 'ubuntu-latest'
-
-  validate-editor-config:
-    name: Validate editor config
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
-      - name: "Setup: editorconfig-checker"
-        run: |
-          npm i -g editorconfig-checker
-      - name: "Validate: Run editorconfig-checker"
-        run: |
-          editorconfig-checker
