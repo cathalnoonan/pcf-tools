@@ -1,5 +1,6 @@
 # PCF Tools
-[![Test](https://github.com/cathalnoonan/pcf-tools/actions/workflows/test.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/test.yml) [![Release](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml)
+[![Test](https://github.com/cathalnoonan/pcf-tools/actions/workflows/build.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/build.yml)
+[![Release](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml/badge.svg)](https://github.com/cathalnoonan/pcf-tools/actions/workflows/release.yml)
 
 ## Cathal.PcfTools.MSBuild.Control
 [![NuGet version (Cathal.PcfTools.MSBuild.Control)](https://img.shields.io/nuget/v/Cathal.PcfTools.MSBuild.Control.svg?style=flat-square&logo=nuget&label=NuGet:+Cathal.PcfTools.MSBuild.Control)](https://www.nuget.org/packages/Cathal.PcfTools.MSBuild.Control/)
@@ -27,11 +28,11 @@ The `.proj` file should contain the following contents:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="0.1.16" />
+    <Sdk Name="Cathal.PcfTools.MSBuild.Proj" Version="0.3.3" />
 </Project>
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `0.3.3` above with later versions as appropriate.
 
 ### control/
 
@@ -40,10 +41,10 @@ The following change should be made in the `control.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
   <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+     <Sdk Name="Cathal.PcfTools.MSBuild.Control" Version="0.1.16" />
++     <Sdk Name="Cathal.PcfTools.MSBuild.Control" Version="0.3.3" />
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `0.3.3` above with later versions as appropriate.
 
 ### solution/
 
@@ -52,10 +53,10 @@ The following change should be made in the `solution.cdsproj` file:
 ```diff
   <?xml version="1.0" encoding="utf-8"?>
   <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-+     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="0.1.16" />
++     <Sdk Name="Cathal.PcfTools.MSBuild.Solution" Version="0.3.3" />
 ```
 
-**Note**: Replace `0.1.16` above with later versions as appropriate.
+**Note**: Replace `0.3.3` above with later versions as appropriate.
 
 ---
 
