@@ -28,7 +28,7 @@ jobs:
       - name: "Setup: Setup dotnet"
         uses: actions/setup-dotnet@v5
       - name: "Setup: Node"
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: src/Cathal.PcfTools.MSBuild.Proj/contentFiles/.nvmrc
       - name: "Build: Restore the test folder"
