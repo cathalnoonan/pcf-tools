@@ -24,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: "Setup: Checkout the repo"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: "Setup: Setup dotnet"
         uses: actions/setup-dotnet@v4
       - name: "Setup: Node"
