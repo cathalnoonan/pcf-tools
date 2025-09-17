@@ -26,7 +26,7 @@ jobs:
       - name: "Setup: Checkout the repo"
         uses: actions/checkout@v5
       - name: "Setup: Setup dotnet"
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
       - name: "Setup: Node"
         uses: actions/setup-node@v4
         with:
