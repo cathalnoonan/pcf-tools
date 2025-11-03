@@ -79,7 +79,7 @@ jobs:
         run: |
           git --no-pager diff
       - name: "Artifacts: Upload artifact"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ github.event.repository.name }}__extract_this_zip
           path: ./test/dist/*
