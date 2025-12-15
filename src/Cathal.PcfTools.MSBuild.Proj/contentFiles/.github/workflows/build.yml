@@ -36,7 +36,7 @@ jobs:
       - name: "Artifacts: Create file containing URL of repo"
         run: echo "${{ github.server_url }}/${{ github.repository }}" > ./dist/repo-url.txt
       - name: "Artifacts: Upload artifact"
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ github.event.repository.name }}__extract_this_zip
           path: ./dist/*
