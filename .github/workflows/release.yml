@@ -51,6 +51,6 @@ jobs:
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
       - name: "GitHub: Create draft release"
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           draft: true
